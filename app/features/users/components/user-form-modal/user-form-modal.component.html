@@ -1,0 +1,78 @@
+@if (visible) {
+<div class="modal-overlay" (click)="onCancel()">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <h2 class="modal-title">{{ isView ? 'View User Details' : (isEdit ? 'Modify Locap Security Credentials' :
+                'Provision New System User') }}
+            </h2>
+            <button type="button" class="close-icon-btn" (click)="onCancel()" aria-label="Close form">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <form (ngSubmit)="onSubmit()" #userForm="ngForm" class="modal-body">
+            @if (errorMessage) {
+            <div class="form-error-alert">{{ errorMessage }}</div>
+            }
+
+            <div class="form-grid">
+                <!-- Full Name -->
+                <div class="form-group">
+                    <label for="uName">Account Holder Name <span class="required">*</span></label>
+                    <input type="text" id="uName" name="name" [(ngModel)]="formModel.name" required
+                        placeholder="e.g., Jane Doe" class="form-input" #nameInput="ngModel"
+                        [class.invalid]="nameInput.touched && nameInput.invalid" [readonly]="isView" />
+                    @if (nameInput.touched && nameInput.invalid) {
+                    <span class="field-error">Name is required.</span>
+                    }
+                </div>
+
+                <!-- Email address -->
+                <div class="form-group">
+                    <label for="uEmail">Corporate Email <span class="required">*</span></label>
+                    <input type="email" id="uEmail" name="email" [(ngModel)]="formModel.email" required email
+                        placeholder="e.g., manager@locap.io" class="form-input" #emailInput="ngModel"
+                        [class.invalid]="emailInput.touched && emailInput.invalid" [readonly]="isView" />
+                    @if (emailInput.touched && emailInput.invalid) {
+                    <span class="field-error">Please enter a valid corporate email.</span>
+                    }
+                </div>
+
+                <!-- Roles dropdown (Searchable Dropdown Reuse) -->
+                <div class="form-group">
+                    <app-searchable-dropdown [options]="roleOptions" [selectedValue]="formModel.role"
+                        label="System Access Role" placeholder="Select access level"
+                        (selectionChange)="onRoleChange($event)" [disabled]="isView"></app-searchable-dropdown>
+                </div>
+
+                <!-- Department dropdown (Searchable Dropdown Reuse) -->
+                <div class="form-group">
+                    <app-searchable-dropdown [options]="deptOptions" [selectedValue]="formModel.department"
+                        label="Operating Department" placeholder="Select division"
+                        (selectionChange)="onDeptChange($event)" [disabled]="isView"></app-searchable-dropdown>
+                </div>
+
+                <!-- Status dropdown (Searchable Dropdown Reuse) -->
+                <div class="form-group full-width">
+                    <app-searchable-dropdown [options]="statusOptions" [selectedValue]="formModel.status"
+                        label="Administrative License State" placeholder="Select license state"
+                        (selectionChange)="onStatusChange($event)" [disabled]="isView"></app-searchable-dropdown>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="cancel-btn" (click)="onCancel()">{{ isView ? 'Close' : 'Cancel' }}</button>
+                @if (!isView) {
+                <button type="submit" class="save-btn" [disabled]="userForm.invalid">
+                    {{ isEdit ? 'Apply Changes' : 'Provision User' }}
+                </button>
+                }
+            </div>
+        </form>
+    </div>
+</div>
+}

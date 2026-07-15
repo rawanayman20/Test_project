@@ -1,0 +1,49 @@
+<div class="dropdown-wrapper">
+    @if (label) {
+    <label class="dropdown-label">{{ label }}</label>
+    }
+    <div class="dropdown-container" [class.disabled]="disabled" [class.open]="isOpen">
+        <!-- Input Button Trigger -->
+        <button type="button" class="dropdown-trigger" [disabled]="disabled" (click)="toggleDropdown()">
+            <span [class.placeholder]="!selectedLabel">
+                {{ selectedLabel || placeholder }}
+            </span>
+            <svg class="chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </button>
+
+        <!-- Dropdown Menu Panel -->
+        @if (isOpen) {
+        <div class="dropdown-menu">
+            <div class="dropdown-search">
+                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" class="search-input" placeholder="Search..." [(ngModel)]="searchText"
+                    (ngModelChange)="filterOptions()" (click)="$event.stopPropagation()" #searchInput />
+            </div>
+
+            <ul class="dropdown-options">
+                @for (option of filteredOptions; track option.value) {
+                <li class="dropdown-option" [class.selected]="option.value === selectedValue"
+                    (click)="selectOption(option)">
+                    {{ option.label }}
+                    @if (option.value === selectedValue) {
+                    <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    }
+                </li>
+                } @empty {
+                <li class="dropdown-empty">No options found</li>
+                }
+            </ul>
+        </div>
+        }
+    </div>
+</div>

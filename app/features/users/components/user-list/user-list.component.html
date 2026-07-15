@@ -1,0 +1,75 @@
+<div class="feature-container">
+
+    <!-- Stats Dashboard overview -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-inner">
+                <span class="stat-name">Active Admins</span>
+                <span class="stat-value text-indigo">{{ adminCount }}</span>
+            </div>
+            <div class="stat-glow indigo-glow"></div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-inner">
+                <span class="stat-name">Pending Verification</span>
+                <span class="stat-value text-amber">{{ pendingCount }}</span>
+            </div>
+            <div class="stat-glow amber-glow"></div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-inner">
+                <span class="stat-name">Total Credentialed</span>
+                <span class="stat-value">{{ totalItems }}</span>
+            </div>
+            <div class="stat-glow white-glow"></div>
+        </div>
+    </div>
+
+    <!-- Toast Alerts -->
+    @if (toastMessage) {
+    <div class="toast-alert" [class]="toastType">
+        <span>{{ toastMessage }}</span>
+    </div>
+    }
+
+    <!-- Reusable Standardized Toolbar Component -->
+    <app-toolbar title="Locap AuthenticationRegistry"
+        subtitle="Standardized Locap corporate credentials, auth clearance, and divisions."
+        primaryActionLabel="Provision User" primaryActionIcon="plus" (primaryActionClick)="openCreateModal()">
+        <!-- Reusable Search Box projected in the Toolbar -->
+        <app-search-box leftControls placeholder="Search team..." [value]="queryParams.search || ''"
+            (search)="onSearch($event)"></app-search-box>
+
+        <!-- Reusable Role Filter projected in the Toolbar -->
+        <app-searchable-dropdown rightControls [options]="roleFilterOptions" [selectedValue]="queryParams['role'] || ''"
+            placeholder="Filter Role (All)" (selectionChange)="onRoleFilter($event)"
+            class="role-dropdown-filter"></app-searchable-dropdown>
+    </app-toolbar>
+
+    <!-- Reusable Loading Spinner Overlay -->
+    <app-loading-spinner [visible]="isLoading" message="Loading security profiles..."></app-loading-spinner>
+
+    <!-- Main Data Table Container -->
+    <div class="data-view-card">
+        <!-- Reusable Data Table Component -->
+        <app-data-table [data]="users" [columns]="columns" [currentSortKey]="queryParams.sortKey || ''"
+            [currentSortDir]="queryParams.sortDir || ''" [actions]="tableActions" (sortChange)="onSortChange($event)"
+            (actionClick)="onRowAction($event)"></app-data-table>
+
+        <!-- Reusable Pagination Component -->
+        <app-pagination [pageIndex]="queryParams.pageIndex || 0" [pageSize]="queryParams.pageSize || 10"
+            [totalItems]="totalItems" (pageChange)="onPageChange($event)"></app-pagination>
+    </div>
+
+    <!-- Add / Edit Modal -->
+    <app-user-form-modal [visible]="isFormModalOpen" [user]="selectedUser" [roles]="roles" [departments]="departments"
+        [isView]="isViewMode" (save)="onSaveUser($event)" (cancel)="closeFormModal()"></app-user-form-modal>
+
+    <!-- Reusable Confirmation Dialog for Users deletions -->
+    <app-confirmation-dialog [visible]="isConfirmOpen" title="Revoke License?" [message]="deleteConfirmationMessage"
+        confirmLabel="Purge Profile" cancelLabel="Keep Profile" type="danger" (confirm)="confirmDelete()"
+        (cancel)="closeConfirm()"></app-confirmation-dialog>
+
+</div>

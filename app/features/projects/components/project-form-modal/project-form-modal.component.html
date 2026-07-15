@@ -1,0 +1,88 @@
+@if (visible) {
+<div class="modal-overlay" (click)="onCancel()">
+    <div class="modal-card" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <h2 class="modal-title">{{ isView ? 'View Project Details' : (isEdit ? 'Modify Locap Project' : 'Initiate
+                New Project') }}</h2>
+            <button type="button" class="close-icon-btn" (click)="onCancel()" aria-label="Close form">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <form (ngSubmit)="onSubmit()" #projectForm="ngForm" class="modal-body">
+            @if (errorMessage) {
+            <div class="form-error-alert">{{ errorMessage }}</div>
+            }
+
+            <div class="form-grid">
+                <!-- Project Name -->
+                <div class="form-group full-width">
+                    <label for="pName">Project Title <span class="required">*</span></label>
+                    <input type="text" id="pName" name="name" [(ngModel)]="formModel.name" required
+                        placeholder="e.g., Telecom Gateway Expansion" class="form-input" #nameInput="ngModel"
+                        [class.invalid]="nameInput.touched && nameInput.invalid" [readonly]="isView" />
+                    @if (nameInput.touched && nameInput.invalid) {
+                    <span class="field-error">Project Title is required.</span>
+                    }
+                </div>
+
+                <!-- Project Description -->
+                <div class="form-group full-width">
+                    <label for="pDesc">Scope Description</label>
+                    <textarea id="pDesc" name="description" [(ngModel)]="formModel.description" rows="3"
+                        placeholder="Summarize project requirements..." class="form-input text-area"
+                        [readonly]="isView"></textarea>
+                </div>
+
+                <!-- Project Manager Dropdown -->
+                <div class="form-group">
+                    <app-searchable-dropdown [options]="managerOptions" [selectedValue]="formModel.manager"
+                        label="Assigned Project Manager" placeholder="Select Manager"
+                        (selectionChange)="onManagerChange($event)" [disabled]="isView"></app-searchable-dropdown>
+                </div>
+
+                <!-- Status Dropdown -->
+                <div class="form-group">
+                    <app-searchable-dropdown [options]="statusOptions" [selectedValue]="formModel.status"
+                        label="Milestone Status" placeholder="Select Status" (selectionChange)="onStatusChange($event)"
+                        [disabled]="isView"></app-searchable-dropdown>
+                </div>
+
+                <!-- Budget -->
+                <div class="form-group">
+                    <label for="pBudget">Budget (USD)</label>
+                    <input type="number" id="pBudget" name="budget" [(ngModel)]="formModel.budget" min="0"
+                        class="form-input" [readonly]="isView" />
+                </div>
+
+                <!-- Start Date -->
+                <div class="form-group">
+                    <label for="pStart">Initiation Date</label>
+                    <input type="date" id="pStart" name="startDate" [(ngModel)]="formModel.startDate" class="form-input"
+                        [readonly]="isView" />
+                </div>
+
+                <!-- End Date -->
+                <div class="form-group">
+                    <label for="pEnd">Target Completion Date</label>
+                    <input type="date" id="pEnd" name="endDate" [(ngModel)]="formModel.endDate" class="form-input"
+                        [readonly]="isView" />
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="cancel-btn" (click)="onCancel()">{{ isView ? 'Close' : 'Cancel' }}</button>
+                @if (!isView) {
+                <button type="submit" class="save-btn" [disabled]="projectForm.invalid">
+                    {{ isEdit ? 'Apply Changes' : 'Launch Project' }}
+                </button>
+                }
+            </div>
+        </form>
+    </div>
+</div>
+}

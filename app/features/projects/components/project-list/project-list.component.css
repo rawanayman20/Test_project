@@ -1,0 +1,119 @@
+.feature-container {
+    display: flex;
+    flex-direction: column;
+    animation: fadeIn var(--transition-normal);
+}
+
+/* Stats Layout */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.stat-card {
+    position: relative;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-normal);
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--border-medium);
+}
+
+.stat-inner {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.stat-name {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+}
+
+.text-indigo {
+    color: var(--primary);
+}
+
+.text-emerald {
+    color: var(--secondary);
+}
+
+.stat-glow {
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    filter: blur(40px);
+    opacity: 0.15;
+    pointer-events: none;
+}
+
+.indigo-glow {
+    background: var(--primary);
+}
+
+.emerald-glow {
+    background: var(--secondary);
+}
+
+.white-glow {
+    background: #ffffff;
+}
+
+/* Status Filter layout custom styling */
+.status-dropdown-filter {
+    min-width: 180px;
+}
+
+.data-view-card {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+/* Toast Alert styling */
+.toast-alert {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 2000;
+    padding: 14px 24px;
+    border-radius: var(--radius-md);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: var(--shadow-lg), 0 0 20px rgba(0, 0, 0, 0.4);
+    animation: slideUp var(--transition-normal);
+}
+
+.toast-alert.success {
+    background: var(--secondary);
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+.toast-alert.danger {
+    background: var(--danger);
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+}

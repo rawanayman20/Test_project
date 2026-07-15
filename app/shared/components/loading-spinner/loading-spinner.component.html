@@ -1,0 +1,12 @@
+@if (visible) {
+<div class="spinner-overlay" [class.embedded]="isEmbedded">
+    <div class="spinner-card">
+        <div class="spinner-ring">
+            <div class="gradient-ball"></div>
+        </div>
+        @if (message) {
+        <p class="spinner-message">{{ message }}</p>
+        }
+    </div>
+</div>
+}

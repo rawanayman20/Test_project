@@ -1,0 +1,63 @@
+<div class="pagination-container">
+    <div class="pagination-info">
+        Showing <span class="highlight">{{ startItem }}</span> to
+        <span class="highlight">{{ endItem }}</span> of
+        <span class="highlight">{{ totalItems }}</span> entries
+    </div>
+
+    <div class="pagination-controls">
+        <div class="page-size-selector">
+            <label for="pageSize">Items per page</label>
+            <select id="pageSize" [ngModel]="pageSize" (ngModelChange)="onPageSizeChange($event)" class="size-select">
+                @for (option of pageSizeOptions; track option) {
+                <option [value]="option">{{ option }}</option>
+                }
+            </select>
+        </div>
+
+        <div class="page-buttons">
+            <!-- First Page -->
+            <button type="button" class="control-btn" [disabled]="pageIndex === 0" (click)="goToPage(0)"
+                title="First Page">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="11 17 6 12 11 7"></polyline>
+                    <polyline points="18 17 13 12 18 7"></polyline>
+                </svg>
+            </button>
+
+            <!-- Previous Page -->
+            <button type="button" class="control-btn" [disabled]="pageIndex === 0" (click)="goToPage(pageIndex - 1)"
+                title="Previous Page">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+
+            <!-- Current Page Display -->
+            <span class="current-page-text">
+                Page {{ pageIndex + 1 }} of {{ totalPages }}
+            </span>
+
+            <!-- Next Page -->
+            <button type="button" class="control-btn" [disabled]="pageIndex >= totalPages - 1"
+                (click)="goToPage(pageIndex + 1)" title="Next Page">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+
+            <!-- Last Page -->
+            <button type="button" class="control-btn" [disabled]="pageIndex >= totalPages - 1"
+                (click)="goToPage(totalPages - 1)" title="Last Page">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="13 17 18 12 13 7"></polyline>
+                    <polyline points="6 17 11 12 6 7"></polyline>
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
