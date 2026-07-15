@@ -1,0 +1,70 @@
+{
+  "hash": "fec5f807",
+  "configHash": "675ddcd5",
+  "lockfileHash": "8ebf3438",
+  "browserHash": "552fe3d1",
+  "optimized": {
+    "@angular/core": {
+      "src": "../../../../../../node_modules/@angular/core/fesm2022/core.mjs",
+      "file": "@angular_core.js",
+      "fileHash": "00f6dd69",
+      "needsInterop": false
+    },
+    "@angular/platform-browser": {
+      "src": "../../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
+      "file": "@angular_platform-browser.js",
+      "fileHash": "2a09c695",
+      "needsInterop": false
+    },
+    "@angular/router": {
+      "src": "../../../../../../node_modules/@angular/router/fesm2022/router.mjs",
+      "file": "@angular_router.js",
+      "fileHash": "eb82a7aa",
+      "needsInterop": false
+    },
+    "@angular/common": {
+      "src": "../../../../../../node_modules/@angular/common/fesm2022/common.mjs",
+      "file": "@angular_common.js",
+      "fileHash": "243755aa",
+      "needsInterop": false
+    },
+    "@angular/forms": {
+      "src": "../../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
+      "file": "@angular_forms.js",
+      "fileHash": "d32afe89",
+      "needsInterop": false
+    },
+    "rxjs": {
+      "src": "../../../../../../node_modules/rxjs/dist/esm5/index.js",
+      "file": "rxjs.js",
+      "fileHash": "c0028ba1",
+      "needsInterop": false
+    },
+    "rxjs/operators": {
+      "src": "../../../../../../node_modules/rxjs/dist/esm5/operators/index.js",
+      "file": "rxjs_operators.js",
+      "fileHash": "f7672658",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-ZCAKDX6I": {
+      "file": "chunk-ZCAKDX6I.js"
+    },
+    "chunk-BYZ37GEY": {
+      "file": "chunk-BYZ37GEY.js"
+    },
+    "chunk-BTDM2WAN": {
+      "file": "chunk-BTDM2WAN.js"
+    },
+    "chunk-HE757GF3": {
+      "file": "chunk-HE757GF3.js"
+    },
+    "chunk-SIHF46FO": {
+      "file": "chunk-SIHF46FO.js"
+    },
+    "chunk-WC5QRWHF": {
+      "file": "chunk-WC5QRWHF.js"
+    }
+  }
+}
